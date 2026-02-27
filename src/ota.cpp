@@ -39,6 +39,11 @@ static String httpGetString(const char* url) {
     return "";
   }
 
+  // Force revalidation / bypass caches
+  http.addHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  http.addHeader("Pragma", "no-cache");
+  http.addHeader("Expires", "0");
+
   int code = http.GET();
   if (code != HTTP_CODE_OK) {
     Serial.printf("GET failed, code=%d\n", code);
@@ -60,7 +65,8 @@ bool checkFirmwareUpdate() {
   }
 
   Serial.println("OTA: Checking version.json...");
-  String json = httpGetString(VERSION_URL);
+  String url = String(VERSION_URL) + "?t=" + String(millis());
+  String json = httpGetString(url.c_str());
   if (json.isEmpty()) {
     Serial.println("OTA: version.json download failed");
     return false;

@@ -94,7 +94,7 @@ void loop() {
 
   // Blink the built-in LED to indicate the device is alive
   digitalWrite(ledPin, HIGH);
-  delay(1000);
+  delay(500);
   digitalWrite(ledPin, LOW);
-  delay(1000);
+  delay(500);
 }

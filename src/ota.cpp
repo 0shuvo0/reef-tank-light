@@ -7,7 +7,7 @@
 
 // ====== CONFIG ======
 static const char* VERSION_URL =
-  "https://raw.githubusercontent.com/<USER>/<REPO>/main/ota/version.json";
+  "https://raw.githubusercontent.com/0shuvo0/reef-tank-light/refs/heads/main/ota_publish/version.json";
 
 // Keep your device's current version here (bump when you build new firmware)
 #ifndef FW_VERSION

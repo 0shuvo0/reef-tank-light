@@ -29,7 +29,7 @@ def after_build(source, target, env, **kwargs):
     shutil.copyfile(built_path, firmware_dst)
 
     # Update these ONCE:
-    BIN_URL = "https://raw.githubusercontent.com/<USER>/<REPO>/main/ota_publish/firmware.bin"
+    BIN_URL = "https://github.com/0shuvo0/reef-tank-light/raw/refs/heads/main/ota_publish/firmware.bin"
 
     version_json_path = os.path.join(publish_dir, "version.json")
     with open(version_json_path, "w") as f:

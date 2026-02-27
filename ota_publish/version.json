@@ -1,4 +1,4 @@
 {
   "version": "1.0.0",
-  "bin": "https://raw.githubusercontent.com/<USER>/<REPO>/main/ota_publish/firmware.bin"
+  "bin": "https://github.com/0shuvo0/reef-tank-light/raw/refs/heads/main/ota_publish/firmware.bin"
 }

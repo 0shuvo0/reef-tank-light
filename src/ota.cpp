@@ -8,7 +8,7 @@
 
 // ====== CONFIG ======
 static const char* VERSION_URL =
-  "https://raw.githubusercontent.com/0shuvo0/reef-tank-light/refs/heads/main/ota_publish/version.json";
+  "https://raw.githubusercontent.com/0shuvo0/reef-tank-light/main/ota_publish/version.json";
 
 #ifndef FW_VERSION
   #error "FW_VERSION is not defined. Set it in platformio.ini build_flags, e.g. -D FW_VERSION=\"1.0.0\""

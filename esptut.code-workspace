@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "ota",
+			"path": "."
+		}
+	],
+	"settings": {}
+}

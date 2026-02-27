@@ -1,0 +1,4 @@
+{
+  "version": "1.0.0",
+  "bin": "https://raw.githubusercontent.com/<USER>/<REPO>/main/ota_publish/firmware.bin"
+}

@@ -4,14 +4,14 @@
 #include <HTTPClient.h>
 #include <HTTPUpdate.h>
 #include <ArduinoJson.h>
+#include <WiFiClientSecure.h>   // ← add this include
 
 // ====== CONFIG ======
 static const char* VERSION_URL =
   "https://raw.githubusercontent.com/0shuvo0/reef-tank-light/refs/heads/main/ota_publish/version.json";
 
-// Keep your device's current version here (bump when you build new firmware)
 #ifndef FW_VERSION
-  #define FW_VERSION "1.0.0"
+  #error "FW_VERSION is not defined. Set it in platformio.ini build_flags, e.g. -D FW_VERSION=\"1.0.0\""
 #endif
 // ====================
 
@@ -65,7 +65,7 @@ bool checkFirmwareUpdate() {
     Serial.println("OTA: version.json download failed");
     return false;
   }
-
+  Serial.println(json);
   JsonDocument doc;
   auto err = deserializeJson(doc, json);
   if (err) {
@@ -109,21 +109,23 @@ bool updateFirmware() {
 
   httpUpdate.onProgress([](int cur, int total) {
     if (total > 0) {
-      int pct = (cur * 100) / total;
-      Serial.printf("OTA: %d%%\r", pct);
+      Serial.printf("OTA: %d%%\r", (cur * 100) / total);
     }
   });
 
   httpUpdate.rebootOnUpdate(true);
 
-  WiFiClient client;
+  WiFiClientSecure client;          // ← was WiFiClient
+  client.setInsecure();             // ← skip cert verification (GitHub has valid certs, 
+                                    //   but you'd need to bundle the root CA otherwise)
+
   t_httpUpdate_return ret = httpUpdate.update(client, g_binUrl);
 
-  Serial.println(); // newline after progress
+  Serial.println();
 
   if (ret == HTTP_UPDATE_OK) {
     Serial.println("OTA: Update OK (rebooting...)");
-    return true; // reboot happens automatically
+    return true;
   }
 
   if (ret == HTTP_UPDATE_NO_UPDATES) {
